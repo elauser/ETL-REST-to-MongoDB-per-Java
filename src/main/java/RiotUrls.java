@@ -1,7 +1,7 @@
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Riot {
+public class RiotUrls {
     static URL getSummonerUrlByName(String region, String summonerName) throws MalformedURLException {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("https://");
