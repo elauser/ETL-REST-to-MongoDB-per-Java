@@ -33,4 +33,16 @@ public class RiotUrls {
 
         return new URL(stringBuilder.toString());
     }
+
+    static URL getMatch(String region, String matchID) throws MalformedURLException {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("https://");
+        stringBuilder.append(region.toLowerCase());
+        stringBuilder.append(".api.riotgames.com/lol/match/v4/matches/");
+        stringBuilder.append(matchID);
+        stringBuilder.append("?api_key=" + HiddenConstants.RIOT_API_KEY);
+
+        return new URL(stringBuilder.toString());
+    }
+
 }

@@ -4,32 +4,35 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 
-public class JsonLoader implements Runnable {
+public class Extractor implements Runnable {
     URL url;
-    BlockingQueue<Document> returnQueue;
+    Queue<Document> returnQueue;
 
-    public JsonLoader() {
-    }
-
-    public JsonLoader(BlockingQueue<Document> returnQueue, URL url) {
+    public Extractor(Queue<Document> returnQueue, URL url) {
         this.url = url;
         this.returnQueue = returnQueue;
     }
 
     public void run() {
-        try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-            String response = readAll(br);
-            returnQueue.add(Document.parse(response));
-        } catch (IOException e) {
-            System.out.println("IOException trying to read from URL: " + e.getMessage());
-            e.printStackTrace();
-        }
+        String jsonResponse = getJson(url);
+        returnQueue.add(Document.parse(jsonResponse));
+        System.out.println("Extracted a Document");
     }
 
-    private String readAll(BufferedReader br) {
+    protected static String getJson(URL url){
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(url.openStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return readAll(br);
+    }
+
+    public static String readAll(BufferedReader br) {
         String line = "";
         StringBuilder sb = new StringBuilder();
         try {
