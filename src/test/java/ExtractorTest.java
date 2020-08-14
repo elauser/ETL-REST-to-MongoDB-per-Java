@@ -8,8 +8,6 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ExtractorTest {
     static URL url;
     static String json;

@@ -1,6 +1,6 @@
 enum REQUEST_LIMIT {
     PER_MINUTE(50),
-    PER_SECOND(10);
+    PER_SECOND(5);
 
     private final int value;
 
